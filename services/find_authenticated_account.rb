@@ -2,7 +2,7 @@ require 'http'
 
 # Returns an authenticated user, or nil
 class FindAuthenticatedAccount
-#  HOST = 'http://configshare-api.herokuapp.com/api/v1'
+  HOST = 'http://incredibly-safe-messenger-api.herokuapp.com/'
 
   def self.call(username:, password:)
     response = HTTP.get("#{HOST}/accounts/#{username}/authenticate",
