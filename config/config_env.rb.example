@@ -1,0 +1,19 @@
+config_env :development, :test do
+  set 'MSG_KEY', '...'
+
+  set 'API_HOST', 'http://incredibly-safe-messenger-api.herokuapp.com'
+  set 'APP_HOST', 'http://localhost:9292'
+end
+
+config_env :production do
+  set 'MSG_KEY', '...'
+
+  set 'API_HOST', 'http://incredibly-safe-messenger-api.herokuapp.com'
+  set 'APP_HOST', 'http://messenger-client.herokuapp.com'
+end
+
+config_env do
+  set 'SENDGRID_DOMAIN', '...'
+  set 'SENDGRID_USERNAME', '...'
+  set 'SENDGRID_PASSWORD', '...'
+end

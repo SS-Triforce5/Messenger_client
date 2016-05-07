@@ -2,11 +2,11 @@ require 'sinatra'
 
 # Base class for ConfigShare Web Application
 class MessengerApp < Sinatra::Base
-  get '/login/?' do
+  get_login = lambda do
     slim :login
   end
 
-  post '/login/?' do
+  post_login = lambda do
     username = params[:username]
     password = params[:password]
 
@@ -21,13 +21,13 @@ class MessengerApp < Sinatra::Base
     end
   end
 
-  get '/logout/?' do
+  get_logout = lambda do
     @current_account = nil
     session[:current_account] = nil
     slim :login
   end
 
-  get '/account/:username' do
+  get_user = lambda do
     if @current_account && @current_account['username'] == params[:username]
       slim(:account)
     else
@@ -35,7 +35,8 @@ class MessengerApp < Sinatra::Base
     end
   end
 
-  get '/register' do
-    slim(:register)
-  end
+get '/login/?', &get_login
+post '/login/?', &post_login
+get '/logout/?', &get_logout
+get '/account/:username', &get_user
 end
