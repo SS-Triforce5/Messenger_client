@@ -1,5 +1,4 @@
 require 'http'
-
 # Returns an authenticated user, or nil
 class FindAuthenticatedAccount
 

@@ -32,8 +32,8 @@ submit_token = lambda do
   new_account = SecureMessage.decrypt(params[:token_secure])
 
   result = CreateVerifiedAccount.call(
-    username: new_account[:username],
-    email: new_account[:email],
+    username: new_account['username'],
+    email: new_account['email'],
     password: params[:password])
 
   puts "RESULT: #{result}"

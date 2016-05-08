@@ -13,6 +13,7 @@ class MessengerApp < Sinatra::Base
     @current_account = FindAuthenticatedAccount.call(
       username: username, password: password)
 
+
     if @current_account
       session[:current_account] = @current_account
       slim :home

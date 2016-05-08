@@ -17,4 +17,5 @@ group :development, :test do
   gem 'rake'
   gem 'config_env'
   gem 'tux'
+  gem 'byebug'
 end

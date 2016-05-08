@@ -3,6 +3,7 @@ GEM
   specs:
     addressable (2.4.0)
     bond (0.5.1)
+    byebug (8.2.5)
     concurrent-ruby (1.0.2)
     config_env (0.1.2)
     daemons (1.2.3)
@@ -84,6 +85,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  byebug
   config_env
   http
   jose
