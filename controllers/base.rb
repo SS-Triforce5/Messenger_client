@@ -5,6 +5,7 @@ class MessengerApp < Sinatra::Base
   use Rack::Session::Cookie, expire_after: 2_592_000 # One month in seconds
 
   set :views, File.expand_path('../../views', __FILE__)
+  set :public_dir, File.expand_path('../../public', __FILE__)
 
   before do
     @current_account = session[:current_account]
