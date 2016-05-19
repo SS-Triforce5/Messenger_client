@@ -1,8 +1,8 @@
 config_env :development, :test do
   set 'MSG_KEY', '...'
 
-  set 'API_HOST', 'http://incredibly-safe-messenger-api.herokuapp.com'
-  set 'APP_HOST', 'http://localhost:9292'
+  set 'API_HOST', 'https://incredibly-safe-messenger-api.herokuapp.com'
+  set 'APP_HOST', 'https://localhost:9292'
 end
 
 config_env :production do

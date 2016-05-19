@@ -62,8 +62,11 @@ GEM
     pony (1.11)
       mail (>= 2.0)
     rack (1.6.4)
+    rack-flash3 (1.0.5)
+      rack
     rack-protection (1.5.3)
       rack
+    rack-ssl-enforcer (0.2.9)
     rack-test (0.6.3)
       rack (>= 1.0)
     rake (11.1.2)
@@ -117,6 +120,8 @@ DEPENDENCIES
   http
   jose
   pony
+  rack-flash3
+  rack-ssl-enforcer
   rake
   rbnacl-libsodium
   rerun
