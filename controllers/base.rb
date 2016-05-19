@@ -1,8 +1,12 @@
 require 'sinatra'
+require 'rack-flash'
 
 # Basec class for Messenger Web Application
 class MessengerApp < Sinatra::Base
-  use Rack::Session::Cookie, expire_after: 2_592_000 # One month in seconds
+  enable :logging
+
+  use Rack::Session::Cookie, secret: ENV['MSG_KEY']
+  use Rack::Flash
 
   set :views, File.expand_path('../../views', __FILE__)
   set :public_dir, File.expand_path('../../public', __FILE__)

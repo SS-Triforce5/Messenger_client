@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.3.1'
 
+gem 'rack-flash3'
 gem 'dry-validation'
 gem 'sinatra'
 gem 'thin'
