@@ -7,17 +7,23 @@ class MessengerApp < Sinatra::Base
   end
 
   post_login = lambda do
-    username = params[:username]
-    password = params[:password]
+    credentials = LoginCredentials.call(params)
+
+    if credentials.failure?
+      flash[:error] = 'Please enter both your username and password'
+      redirect '/login'
+      halt
+    end
 
     @current_account = FindAuthenticatedAccount.call(
       username: username, password: password)
 
-
     if @current_account
-      session[:current_account] = @current_account
-      slim :home
+      session[:current_account] = SecureMessage.encrypt(@current_account)
+      flash[:notice] = "Welcome back #{@current_account['username']}"
+      redirect '/'
     else
+      flash[:error] = 'Your username or password did not match our records'
       slim :login
     end
   end
@@ -25,6 +31,7 @@ class MessengerApp < Sinatra::Base
   get_logout = lambda do
     @current_account = nil
     session[:current_account] = nil
+    flash[:notice] = 'You have logged out - please login again to use this site'
     slim :login
   end
 
