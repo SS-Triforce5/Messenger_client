@@ -16,7 +16,7 @@ class MessengerApp < Sinatra::Base
     end
 
     @current_account = FindAuthenticatedAccount.call(
-      username: username, password: password)
+      username: credentials[:username], password: credentials[:password])
 
     if @current_account
       session[:current_account] = SecureMessage.encrypt(@current_account)
