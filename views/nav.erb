@@ -20,9 +20,9 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                   <% begin %>
-                  <% if  @current_account = @current_account['username'] %>
+                  <% if @current_account['username'] %>
                     <li>
-                        <a class="page-scroll" href="/account/<%= @current_account  %>">Account</a>
+                        <a class="page-scroll" href="/account/<%= @current_account['username']  %>">Account</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="/logout">Logout</a>
