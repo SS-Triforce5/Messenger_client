@@ -17,7 +17,9 @@ class MessengerApp < Sinatra::Base
   set :public_dir, File.expand_path('../../public', __FILE__)
 
   before do
-    @current_account = session[:current_account]
+    if session[:current_account]
+      @current_account = SecureMessage.decrypt(session[:current_account])
+    end
   end
 
   get '/' do
