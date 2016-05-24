@@ -15,10 +15,12 @@ class MessengerApp < Sinatra::Base
       halt
     end
 
-    @current_account = FindAuthenticatedAccount.call(
+    auth_account = FindAuthenticatedAccount.call(
       username: credentials[:username], password: credentials[:password])
 
-    if @current_account
+    if auth_account
+      @current_account = auth_account['account']
+      session[:auth_token] = auth_account['account']
       session[:current_account] = SecureMessage.encrypt(@current_account)
       flash[:notice] = "Welcome back #{@current_account['username']}"
       redirect '/'
