@@ -1,7 +1,20 @@
 h2.page-margin Your Messages
 table class="messages"
-  tr
-    td id
-    td #{@messages['id']}
+  thead
+    tr
+      td id
+      td sender
+      td receiver
+      td message
+      td time
+  tbody
+    -@messages.each do |mes|
+      tr
+        td #{mes['id']}
+        td #{mes['sender']}
+        td #{mes['receiver']}
+        td #{mes['message']}
+        td #{mes['time']}
+
 
     -
