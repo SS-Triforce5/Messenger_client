@@ -9,5 +9,6 @@ class MessengerApp < Sinatra::Base
     @messages ? slim(:all_messages) : redirect('/login')
 
 
-  get '/:username/messages', &get_message
+  	get '/:username/messages', &get_message
+  end
 end
