@@ -7,8 +7,8 @@ class MessengerApp < Sinatra::Base
       @messages = GetAllMessages.call(username: params[:username], auth_token: session[:auth_token])
     end
     @messages ? slim(:all_messages) : redirect('/login')
-
-
-  	get '/:username/messages', &get_message
   end
+
+  	get '/message/:username', &get_message
+
 end
