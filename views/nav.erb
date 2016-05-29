@@ -22,10 +22,13 @@
                   <% begin %>
                   <% if @current_account['username'] %>
                     <li>
-                        <a class="page-scroll" href="/account/<%= @current_account['username']  %>">Account</a>
+                        <a class="page-scroll" href="/account/<%= @current_account['username'] %>">Account</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="/message/<%= @current_account['username']  %>">Message</a>
+                        <a class="page-scroll" href="/message/<%= @current_account['username'] %>/chatroom">Chatroom</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/message/<%= @current_account['username'] %>">History</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="/logout">Logout</a>
