@@ -9,6 +9,15 @@ class MessengerApp < Sinatra::Base
     @messages ? slim(:all_messages) : redirect('/login')
   end
 
-  	get '/message/:username', &get_message
+  get_chatroom = lambda do
+    if @current_account
+      slim :chatroom
+    else
+      flash[:notice] = "you must login before you chat with others"
+      redirect('/login')
+    end
+  end
 
+  get '/message/:username/?', &get_message
+  get '/message/chatroom/?', &get_chatroom
 end
