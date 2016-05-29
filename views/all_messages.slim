@@ -8,11 +8,11 @@ table class="table"
       td message
       td time      
   tbody
-    -@messages.each do |mes|
+    - @messages.each do |mes|
       tr
-        td #{mes['id']}
-        td #{mes['sender']}
-        td #{mes['receiver']}
-        td #{mes['message']}
-        td #{mes['time']}
+        td #{mes[:id]}
+        td #{mes[:sender]}
+        td #{mes[:receiver]}
+        td #{mes[:message]}
+        td #{mes[:time]}
         

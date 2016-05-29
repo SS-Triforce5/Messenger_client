@@ -1,0 +1,22 @@
+link href="/css/bootstrap.css" rel="stylesheet" /
+.panel.panel-info
+  .panel-heading
+    | RECENT CHAT HISTORY WITH #{receiver}
+  .panel-body
+    ul.media-list
+      - messages.each do |message|
+        li.media
+          .media-body
+            .media
+              a.pull-left href="#"
+                img.media-object.img-circle src="/img/user.jpeg" /
+              .media-body #{message['message']}
+              br/
+              small.text-muted #{message['sender']} | #{message['time']}
+              hr/
+  .panel-footer
+    form action='/message/#{sender}/chatroom/#{receiver}' method='post' style="margin-bottom: 0px;"
+      .input-group
+        input.form-control name='message' placeholder=("Enter Message") type="text" /
+        span.input-group-btn
+          button.btn.btn-info type="submit"  SEND
