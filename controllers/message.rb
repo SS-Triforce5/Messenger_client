@@ -14,9 +14,12 @@ class MessengerApp < Sinatra::Base
 
   get_chatroom = lambda do
     if @current_account
-      response = HTTP.auth("Bearer #{session[:auth_token]}")
-                       .get("#{ENV['API_HOST']}/api/v1/account/")
-      @all_users = response.parse
+      @all_users = HTTP.auth("Bearer #{session[:auth_token]}")
+                     .get("#{ENV['API_HOST']}/api/v1/account/")
+                     .parse
+                     .sort_by { |user| Time.parse(user['updated_at']) }
+                     .reverse
+                     .each { |user| user['updated_at'] = relative_time(user['updated_at'])}
       slim :chatroom
     else
       flash[:notice] = "you must login before you chat with others"
@@ -25,7 +28,13 @@ class MessengerApp < Sinatra::Base
   end
 
   get_message = lambda do
-    Slim::Template.new('views/message.slim').render(Object.new)
+    response = HTTP.auth("Bearer #{session[:auth_token]}")
+                   .get("#{ENV['API_HOST']}/api/v1/message/#{params['sender']}/#{params['receiver']}")
+                   .parse
+                   .map{ |message| message['data']}
+    logger.info response
+    logger.info params
+    Slim::Template.new('views/message.slim').render(Object.new, messages: response, receiver: params['receiver'])
   end
 
   get '/message/:username/?', &get_all_message

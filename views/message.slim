@@ -1,65 +1,61 @@
 link href="/css/bootstrap.css" rel="stylesheet" /
 .panel.panel-info
   .panel-heading
-    | RECENT CHAT HISTORY
+    | RECENT CHAT HISTORY WITH #{receiver}
   .panel-body
     ul.media-list
-      li.media
-        .media-body
-          .media
-            a.pull-left href="#"
-              img.media-object.img-circle src="/img/user.jpeg" /
-            .media-body
-              | Donec sit amet ligula enim. Duis vel condimentum massa.
-
-              | Donec sit amet ligula enim. Duis vel condimentum massa.Donec sit amet ligula enim.
-              | Duis vel condimentum massa.
-              | Donec sit amet ligula enim. Duis vel condimentum massa.
-              br/
-              small.text-muted Alex Deo | 23rd June at 5:00pm
-              hr/
-      li.media
-        .media-body
-          .media
-            a.pull-left href="#"
-              img.media-object.img-circle src="/img/user.jpeg" /
-            .media-body
-              | Donec sit amet ligula enim. Duis vel condimentum massa.
-
-              | Donec sit amet ligula enim. Duis vel condimentum massa.Donec sit amet ligula enim.
-              | Duis vel condimentum massa.
-              | Donec sit amet ligula enim. Duis vel condimentum massa.
-              br/
-              small.text-muted Jhon Rexa | 23rd June at 5:00pm
-              hr/
-      li.media
-        .media-body
-          .media
-            a.pull-left href="#"
-              img.media-object.img-circle src="/img/user.jpeg" /
-            .media-body
-              | Donec sit amet ligula enim. Duis vel condimentum massa.
-
-              | Donec sit amet ligula enim. Duis vel condimentum massa.Donec sit amet ligula enim.
-              | Duis vel condimentum massa.
-              | Donec sit amet ligula enim. Duis vel condimentum massa.
-              br/
-              small.text-muted Alex Deo | 23rd June at 5:00pm
-              hr/
-      li.media
-        .media-body
-          .media
-            a.pull-left href="#"
-              img.media-object.img-circle src="/img/user.jpeg" /
-            .media-body
-              | Donec sit amet ligula enim. Duis vel condimentum massa.
-
-              | Donec sit amet ligula enim. Duis vel condimentum massa.Donec sit amet ligula enim.
-              | Duis vel condimentum massa.
-              | Donec sit amet ligula enim. Duis vel condimentum massa.
-              br/
-              small.text-muted Jhon Rexa | 23rd June at 5:00pm
-              hr/
+      - messages.each do |message|
+        li.media
+          .media-body
+            .media
+              a.pull-left href="#"
+                img.media-object.img-circle src="/img/user.jpeg" /
+              .media-body #{message['message']}
+                br/
+                small.text-muted #{message['sender']} | #{message['time']}
+                hr/
+      / li.media
+      /   .media-body
+      /     .media
+      /       a.pull-left href="#"
+      /         img.media-object.img-circle src="/img/user.jpeg" /
+      /       .media-body
+      /         | Donec sit amet ligula enim. Duis vel condimentum massa.
+      / 
+      /         | Donec sit amet ligula enim. Duis vel condimentum massa.Donec sit amet ligula enim.
+      /         | Duis vel condimentum massa.
+      /         | Donec sit amet ligula enim. Duis vel condimentum massa.
+      /         br/
+      /         small.text-muted Jhon Rexa | 23rd June at 5:00pm
+      /         hr/
+      / li.media
+      /   .media-body
+      /     .media
+      /       a.pull-left href="#"
+      /         img.media-object.img-circle src="/img/user.jpeg" /
+      /       .media-body
+      /         | Donec sit amet ligula enim. Duis vel condimentum massa.
+      / 
+      /         | Donec sit amet ligula enim. Duis vel condimentum massa.Donec sit amet ligula enim.
+      /         | Duis vel condimentum massa.
+      /         | Donec sit amet ligula enim. Duis vel condimentum massa.
+      /         br/
+      /         small.text-muted Alex Deo | 23rd June at 5:00pm
+      /         hr/
+      / li.media
+      /   .media-body
+      /     .media
+      /       a.pull-left href="#"
+      /         img.media-object.img-circle src="/img/user.jpeg" /
+      /       .media-body
+      /         | Donec sit amet ligula enim. Duis vel condimentum massa.
+      / 
+      /         | Donec sit amet ligula enim. Duis vel condimentum massa.Donec sit amet ligula enim.
+      /         | Duis vel condimentum massa.
+      /         | Donec sit amet ligula enim. Duis vel condimentum massa.
+      /         br/
+      /         small.text-muted Jhon Rexa | 23rd June at 5:00pm
+      /         hr/
   .panel-footer
     .input-group
       input.form-control placeholder=("Enter Message") type="text" /

@@ -1,6 +1,8 @@
 doctype html
 html
-  link href="/css/bootstrap.css" rel="stylesheet" /
+  javascript:
+    function go(loc) { document.getElementById('chatroom').src = loc; }
+  link href="/css/bootstrap.css" rel="stylesheet" 
   body style="font-family:Verdana" 
     .container
       .row style="padding-top:40px;" 
@@ -13,13 +15,13 @@ html
             .panel-body
               ul.media-list
                 - @all_users.each do |user|
-                  li.media
+                  li.media onclick="go('/message/#{@current_account['username']}/chatroom/#{user['username']}')"
                     .media-body
                       .media
-                        a.pull-left href="#" 
+                        a.pull-left  
                           img.media-object.img-circle src="/img/user.jpeg" style="max-height:40px;" /
                         .media-body
                           h5 #{user['username']} | User
                           small.text-muted Active From #{user['updated_at']}
         .col-md-8.embed-responsive.embed-responsive-16by9
-          iframe.embed-responsive-item src="/message/#{@current_account['username']}/chatroom/pengyu"
+          iframe.embed-responsive-item id='chatroom' src="/message/#{@current_account['username']}/chatroom/#{@all_users[0]['username']}"
