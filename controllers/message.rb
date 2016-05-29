@@ -32,13 +32,23 @@ class MessengerApp < Sinatra::Base
                    .get("#{ENV['API_HOST']}/api/v1/message/#{params['sender']}/#{params['receiver']}")
                    .parse
                    .map{ |message| message['data']}
-    logger.info response
-    logger.info params
-    Slim::Template.new('views/message.slim').render(Object.new, messages: response, receiver: params['receiver'])
+
+    Slim::Template.new('views/message.slim').render(Object.new,
+                                             sender: params['sender'],
+                                             receiver: params['receiver'],
+                                             messages: response)
+  end
+
+  post_message = lambda do
+    req_body = {sender: params['sender'], receiver: params['receiver'], message: params['message']}
+    response = HTTP.auth("Bearer #{session[:auth_token]}")
+                   .post("#{ENV['API_HOST']}/api/v1/message/", json: req_body)
+    redirect("/message/#{params['sender']}/chatroom/#{params['receiver']}")
   end
 
   get '/message/:username/?', &get_all_message
   get '/message/:username/chatroom/?', &get_chatroom
   get '/message/:sender/chatroom/:receiver/?', &get_message
+  post '/message/:sender/chatroom/:receiver/?', &post_message
 
 end
