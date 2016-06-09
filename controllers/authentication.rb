@@ -4,7 +4,7 @@ require 'sinatra'
 class MessengerApp < Sinatra::Base
 
 get_login = lambda do
-  @gh_url = HTTP.get("#{ENV['API_HOST']}/github_sso_url").parse['url']
+  @gh_url = HTTP.get("#{ENV['API_HOST']}/api/v1/github_sso_url").parse['url']
   slim :login
 end
 
@@ -38,7 +38,7 @@ get_logout = lambda do
   slim :login
 end
 
-get_github_callback do
+get_github_callback = lambda do
   begin
     sso_account = RetrieveGithubAccount.call(params['code'])
 
