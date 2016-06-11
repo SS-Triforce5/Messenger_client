@@ -11,6 +11,9 @@ gem 'http'
 gem 'rbnacl-libsodium'
 gem 'jose'
 gem 'pony'
+gem 'secure_headers'
+gem 'tux'
+gem 'rack-flash-session'
 
 group :development do
   gem 'rerun'
@@ -18,7 +21,5 @@ end
 
 group :development, :test do
   gem 'rake'
-  gem 'config_env'
-  gem 'tux'
-  gem 'byebug'
+  gem 'config_env
 end
