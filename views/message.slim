@@ -6,6 +6,7 @@ javascript:
       if(e.keyCode==13)
         Submit();
     });
+    $(".panel-body").scrollTop($(".panel-body")[0].scrollHeight);
     setInterval(polling, 3000);
   });
   function Submit(){
@@ -33,7 +34,10 @@ javascript:
         type: 'get',
         timeout: 3000,
         success: function(response){
-          $('ul.media-list').append(response)
+          if(response != ''){
+            $('ul.media-list').append(response);
+            $(".panel-body").scrollTop($(".panel-body")[0].scrollHeight);
+          }
         },
     });
   };
@@ -41,7 +45,7 @@ javascript:
 .panel.panel-info
   .panel-heading
     | RECENT CHAT HISTORY WITH #{receiver}
-  .panel-body
+  .panel-body style="height:450px;overflow-y: scroll;" 
     ul.media-list
       - messages.each do |message|
         li.media
