@@ -1,18 +1,61 @@
-h2.page-margin Set Your Password
-table
-  tr
-    td Username:
-    td
-      == @new_account['username']
-  tr
-    td Email:
-    td
-      == @new_account['email']
-form action="/register/#{@token_secure}/verify" method='post' id='user-form'
-  label for='password' Password:
-  input type='password' name='password' id='password_input'
-  br
-  label for='password' Re-enter Password:
-  input type='password' name='password_confirm' id='password_confirm_input'
-  br
-  input type='submit' id='registration-form-submit' class='submit' value='submit'
+doctype html
+html lang="en" 
+  head
+    meta charset="utf-8" /
+    meta content="IE=edge" http-equiv="X-UA-Compatible" /
+    meta content="width=device-width, initial-scale=1" name="viewport" /
+    title Login to ISM
+    /! CSS
+    link href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500" rel="stylesheet" /
+    link href="/login_style/css/form-elements.css" rel="stylesheet" /
+    link href="/login_style/css/style.css" rel="stylesheet" /
+    link href="/login_style/ico/favicon.png" rel=("shortcut icon") /
+    link href="/login_style/ico/apple-touch-icon-144-precomposed.png" rel="apple-touch-icon-precomposed" sizes="144x144" /
+    link href="/login_style/ico/apple-touch-icon-114-precomposed.png" rel="apple-touch-icon-precomposed" sizes="114x114" /
+    link href="/login_style/ico/apple-touch-icon-72-precomposed.png" rel="apple-touch-icon-precomposed" sizes="72x72" /
+    link href="/login_style/ico/apple-touch-icon-57-precomposed.png" rel="apple-touch-icon-precomposed" /
+    link href="/login_style/font-awesome/css/font-awesome.min.css" rel="stylesheet" /
+    script src="/login_style/js/jquery-1.11.1.min.js" 
+    script src="/login_style/bootstrap/js/bootstrap.min.js" 
+    script src="/login_style/js/jquery.backstretch.min.js" 
+    script src="/login_style/js/scripts.js" 
+
+  body
+    /! Top content
+    .top-content
+      .inner-bg
+        .container
+          .row
+            .col-sm-8.col-sm-offset-2.text
+              h1
+                strong Account Validation
+          .row
+            .col-sm-6.col-sm-offset-3.form-box
+              .form-top
+                .form-top-left
+                  h3 One More Step
+                  p 
+                  |Please setup your password
+                .form-top-right
+                  i.fa.fa-key
+              .form-bottom
+                tr
+                    div class="container"
+                      div class="row"
+                        div class="col-sm-2 confirm_font" Username:
+                        div class="col-sm-10 confirm_font"
+                          == @new_account['username']
+                      div class="row"
+                        div class="col-sm-2 confirm_font" Email:
+                        div class="col-sm-10 confirm_font"
+                          == @new_account['email']
+                          p 
+                form action="/register/#{@token_secure}/verify" method="post" role="user-form" 
+                  .form-group
+                    label.sr-only for="password_input"  Password
+                    input#form-password.form-password.form-control name="password"  placeholder="Password..." type="password" /
+                  p
+                  .form-group
+                    label.sr-only for="form-password"  Confirm Password
+                    input#form-password.form-password.form-control name="password_confirm"  placeholder="Confirm Password..." type="password" /
+                  button.btn.btn_submit type="submit" id='registration-form-submit' Activate
