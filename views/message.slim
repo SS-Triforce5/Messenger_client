@@ -1,4 +1,22 @@
+script src="/js/jquery.js"
 link href="/css/bootstrap.css" rel="stylesheet" /
+javascript:
+  var Submit=function(){
+    $.ajax({
+      url: '/message/#{sender}/chatroom/#{receiver}',
+      data: 'message='+$('#message').val(),
+      type:"POST",
+      dataType:'text',
+      success: function(msg){
+        alert(msg);
+      },
+      error:function(xhr, ajaxOptions, thrownError){
+        alert(xhr.status);
+        alert(thrownError);
+      }
+    });
+  }
+
 .panel.panel-info
   .panel-heading
     | RECENT CHAT HISTORY WITH #{receiver}
@@ -15,8 +33,7 @@ link href="/css/bootstrap.css" rel="stylesheet" /
               small.text-muted #{message['sender']} | #{message['time']}
               hr/
   .panel-footer
-    form action='/message/#{sender}/chatroom/#{receiver}' method='post' style="margin-bottom: 0px;"
-      .input-group
-        input.form-control name='message' placeholder=("Enter Message") type="text" /
-        span.input-group-btn
-          button.btn.btn-info type="submit"  SEND
+    .input-group
+      input.form-control id='message' placeholder=("Enter Message") type="text" /
+      span.input-group-btn
+        button.btn.btn-info type="submit" onclick='Submit();' SEND

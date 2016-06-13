@@ -40,10 +40,11 @@ class MessengerApp < Sinatra::Base
   end
 
   post_message = lambda do
-    req_body = {sender: params['sender'], receiver: params['receiver'], message: params['message']}
-    response = HTTP.auth("Bearer #{session[:auth_token]}")
-                   .post("#{ENV['API_HOST']}/api/v1/message/", json: req_body)
-    redirect("/message/#{params['sender']}/chatroom/#{params['receiver']}")
+    if params['message']
+      req_body = {sender: params['sender'], receiver: params['receiver'], message: params['message']}
+      response = HTTP.auth("Bearer #{session[:auth_token]}")
+                     .post("#{ENV['API_HOST']}/api/v1/message/", json: req_body)
+    end
   end
 
   get '/message/:username/?', &get_all_message
