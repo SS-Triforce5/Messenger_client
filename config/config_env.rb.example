@@ -1,19 +1,24 @@
-config_env :development, :test do
-  set 'MSG_KEY', '...'
+# Copy this file to [app]/config/config_env.rb
+# Replace [...] with credentials/keys/etc.
+# Generate symmetric keys with `rake key:symmetric:generate` task
+# Generate asymmetric keys with `rake key:asymmetric:generate` task
 
+config_env :development, :test do
+  set 'MSG_KEY', '[rbnacl symmetric key]'
   set 'API_HOST', 'https://incredibly-safe-messenger-api.herokuapp.com'
   set 'APP_HOST', 'https://localhost:9292'
+  set 'APP_SECRET_KEY', '[Ed25519 secret key]'
 end
 
 config_env :production do
-  set 'MSG_KEY', '...'
-
-  set 'API_HOST', 'http://incredibly-safe-messenger-api.herokuapp.com'
-  set 'APP_HOST', 'http://messenger-client.herokuapp.com'
+  set 'MSG_KEY', '[rbnacl symmetric key]'
+  set 'API_HOST', 'https://incredibly-safe-messenger-api.herokuapp.com'
+  set 'APP_HOST', 'https://localhost:9292'
+  set 'APP_SECRET_KEY', '[Ed25519 secret key]'
 end
 
 config_env do
-  set 'SENDGRID_DOMAIN', '...'
-  set 'SENDGRID_USERNAME', '...'
-  set 'SENDGRID_PASSWORD', '...'
+  set 'SENDGRID_DOMAIN', '[...]'
+  set 'SENDGRID_USERNAME', '[...]'
+  set 'SENDGRID_PASSWORD', '[...]'
 end

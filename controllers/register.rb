@@ -15,6 +15,7 @@ sending_registration_email = lambda do
   end
   begin
     EmailRegistrationVerification.call(registration)
+    flash[:notice] = 'A verification email has been sent to you: please check'
     redirect '/'
   rescue => e
     logger.error "FAIL EMAIL: #{e}"
@@ -43,7 +44,13 @@ submit_token = lambda do
     username: new_account['username'],
     email: new_account['email'],
     password: passwords[:password])
-  result ? redirect('/login') : redirect('/register')
+    if result
+       flash[:notice] = 'Please login with your new username and password'
+       redirect('/login')
+     else
+       flash[:notice] = 'Your account could not be created; please try again'
+       redirect('/register')
+     end
 end
 
 get '/register', &get_register
