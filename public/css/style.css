@@ -3,6 +3,10 @@
   background-color: rgba(0, 0, 255, 0.3);
 }
 
+.note_margin{
+margin-top: 55px;
+}
+
 .flash.error {
   color: #C00000;
   background-color: rgba(255, 0, 0, 0.3);
