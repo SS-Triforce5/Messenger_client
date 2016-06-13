@@ -3,16 +3,16 @@ html
   javascript:
     function go(loc) { document.getElementById('chatroom').src = loc; }
   link href="/css/bootstrap.css" rel="stylesheet" 
-  body style="font-family:Verdana" 
+  body style="font-family:Verdana;" 
     .container
-      .row style="padding-top:40px;" 
+      .row style="padding-top:40px" 
         br/
         br/
-        .col-md-4
+        .col-md-4 
           .panel.panel-primary
             .panel-heading
               | ONLINE USERS
-            .panel-body
+            .panel-body style="height:500px;overflow-y: scroll;"
               ul.media-list
                 - @all_users.each do |user|
                   li.media onclick="go('/message/#{@current_account['username']}/chatroom/#{user['username']}')"
@@ -23,5 +23,5 @@ html
                         .media-body
                           h5 #{user['username']} | User
                           small.text-muted Active From #{user['updated_at']}
-        .col-md-8.embed-responsive.embed-responsive-16by9
+        .col-md-8.embed-responsive.embed-responsive-16by9 
           iframe.embed-responsive-item id='chatroom' src="/message/#{@current_account['username']}/chatroom/#{@all_users[0]['username']}"

@@ -1,8 +1,51 @@
+script src="/js/jquery.js"
 link href="/css/bootstrap.css" rel="stylesheet" /
+javascript:
+  $(document).ready(function(){
+    $('#message').keypress(function(e){
+      if(e.keyCode==13)
+        Submit();
+    });
+    $(".panel-body").scrollTop($(".panel-body")[0].scrollHeight);
+    setInterval(polling, 3000);
+  });
+  function Submit(){
+    var data = $('#message').val();
+    $('#message').val('')
+    $.ajax({
+      url: '/message/#{sender}/chatroom/#{receiver}',
+      data: 'message=' + data,
+      type:"POST",
+      dataType:'text',
+      error:function(xhr, ajaxOptions, thrownError){
+        alert(xhr.status);
+        alert(thrownError);
+      }
+    });
+  }
+  function polling() {
+    var time = '';
+    if ($('small.text-muted').length > 0){
+      time = $('small.text-muted').last().text().split(' | ')[1];
+    }
+    $('.panel-body ul.media-list').children().last()
+    $.ajax({
+        url: '/message/#{sender}/chatroom/#{receiver}/poll?after='+time,
+        type: 'get',
+        timeout: 3000,
+        success: function(response){
+          if(response != ''){
+            $('ul.media-list').append(response);
+            $(".panel-body").scrollTop($(".panel-body")[0].scrollHeight);
+          }
+        },
+    });
+  };
+
 .panel.panel-info
   .panel-heading
     | RECENT CHAT HISTORY WITH #{receiver}
-  .panel-body
+  .panel-body style="height:450px;overflow-y: scroll;" 
     ul.media-list
       - messages.each do |message|
         li.media
@@ -15,8 +58,7 @@ link href="/css/bootstrap.css" rel="stylesheet" /
               small.text-muted #{message['sender']} | #{message['time']}
               hr/
   .panel-footer
-    form action='/message/#{sender}/chatroom/#{receiver}' method='post' style="margin-bottom: 0px;"
-      .input-group
-        input.form-control name='message' placeholder=("Enter Message") type="text" /
-        span.input-group-btn
-          button.btn.btn-info type="submit"  SEND
+    .input-group
+      input.form-control id='message' placeholder=("Enter Message") type="text" /
+      span.input-group-btn
+        button.btn.btn-info type="submit" onclick='Submit();' SEND
