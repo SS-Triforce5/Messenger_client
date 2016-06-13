@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'rack-flash'
 require 'rack/ssl-enforcer'
+require 'slim'
 
 # Basec class for Messenger Web Application
 class MessengerApp < Sinatra::Base
@@ -8,6 +9,7 @@ class MessengerApp < Sinatra::Base
 
   use Rack::Session::Cookie, secret: ENV['MSG_KEY']
   use Rack::Flash
+  Slim::Engine.set_options pretty: true
 
   configure :production do
     use Rack::SslEnforcer

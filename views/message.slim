@@ -1,21 +1,42 @@
 script src="/js/jquery.js"
 link href="/css/bootstrap.css" rel="stylesheet" /
 javascript:
-  var Submit=function(){
+  $(document).ready(function(){
+    $('#message').keypress(function(e){
+      if(e.keyCode==13)
+        Submit();
+    });
+    setInterval(polling, 3000);
+  });
+  function Submit(){
+    var data = $('#message').val();
+    $('#message').val('')
     $.ajax({
       url: '/message/#{sender}/chatroom/#{receiver}',
-      data: 'message='+$('#message').val(),
+      data: 'message=' + data,
       type:"POST",
       dataType:'text',
-      success: function(msg){
-        alert(msg);
-      },
       error:function(xhr, ajaxOptions, thrownError){
         alert(xhr.status);
         alert(thrownError);
       }
     });
   }
+  function polling() {
+    var time = '';
+    if ($('small.text-muted').length > 0){
+      time = $('small.text-muted').last().text().split(' | ')[1];
+    }
+    $('.panel-body ul.media-list').children().last()
+    $.ajax({
+        url: '/message/#{sender}/chatroom/#{receiver}/poll?after='+time,
+        type: 'get',
+        timeout: 3000,
+        success: function(response){
+          $('ul.media-list').append(response)
+        },
+    });
+  };
 
 .panel.panel-info
   .panel-heading
