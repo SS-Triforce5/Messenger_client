@@ -35,7 +35,7 @@ get_logout = lambda do
   @current_account = nil
   session[:current_account] = nil
   flash[:notice] = 'You have logged out - please login again to use this site'
-  slim :login
+  redirect '/login'
 end
 
 get_github_callback = lambda do
