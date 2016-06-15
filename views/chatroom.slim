@@ -21,7 +21,7 @@ html
                         a.pull-left  
                           img.media-object.img-circle src="/img/user.jpeg" style="max-height:40px;" /
                         .media-body
-                          h5 #{user['username']} | User
+                          h5 #{user['username']} | #{user['type']}
                           small.text-muted Active From #{user['updated_at']}
         .col-md-8.embed-responsive.embed-responsive-16by9 
           iframe.embed-responsive-item id='chatroom' src="/message/#{@current_account['username']}/chatroom/#{@all_users[0]['username']}"

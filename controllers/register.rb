@@ -48,7 +48,7 @@ submit_token = lambda do
        flash[:notice] = 'Please login with your new username and password'
        redirect('/login')
      else
-       flash[:notice] = 'Your account could not be created; please try again'
+       flash[:error] = 'Your account could not be created; please try again'
        redirect('/register')
      end
 end
