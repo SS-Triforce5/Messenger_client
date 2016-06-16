@@ -64,7 +64,7 @@ html
   end
 
   post_message = lambda do
-    if params['message']
+    if params['message'].strip != '' && params['message']
       req_body = {sender: params['sender'], receiver: params['receiver'], message: params['message']}
       response = HTTP.auth("Bearer #{session[:auth_token]}")
                      .post("#{ENV['API_HOST']}/api/v1/message/", json: req_body)
