@@ -1,7 +1,13 @@
 doctype html
 html
   javascript:
-    function go(loc) { document.getElementById('chatroom').src = loc; }
+    function go(loc) { 
+      document.getElementById('chatroom').src = loc;
+    }
+    function change_color(li){
+      $('li.media').css('background', 'white')
+      li.style.background='#E0E0E0';
+    }
   link href="/css/bootstrap.css" rel="stylesheet" 
   body style="font-family:Verdana;" 
     .container
@@ -15,7 +21,7 @@ html
             .panel-body style="height:500px;overflow-y: scroll;"
               ul.media-list
                 - @all_users.each do |user|
-                  li.media onclick="go('/message/#{@current_account['username']}/chatroom/#{user['username']}')"
+                  li.media onclick="go('/message/#{@current_account['username']}/chatroom/#{user['username']}');change_color(this);"
                     .media-body
                       .media
                         a.pull-left  
