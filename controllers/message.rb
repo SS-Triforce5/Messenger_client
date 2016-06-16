@@ -47,7 +47,7 @@ class MessengerApp < Sinatra::Base
     response.map do |res|
       message = res['data']
 <<-html
-<li class="media">
+<li class="media fadeInRight animated">
   <div class="media-body">
     <div class="media">
       <a class="pull-left" href="#"><img class="media-object img-circle" src="/img/user.jpeg" /></a>
